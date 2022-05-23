@@ -1,7 +1,7 @@
 
 /*
-Курсовой проект представляет собой упрощенную версию структуры БД сервиса «Кинопоиск»,
-содержащую в себе информацию о фильмах, пользователях платформы и различные представления.
+РљСѓСЂСЃРѕРІРѕР№ РїСЂРѕРµРєС‚ РїСЂРµРґСЃС‚Р°РІР»СЏРµС‚ СЃРѕР±РѕР№ СѓРїСЂРѕС‰РµРЅРЅСѓСЋ РІРµСЂСЃРёСЋ СЃС‚СЂСѓРєС‚СѓСЂС‹ Р‘Р” СЃРµСЂРІРёСЃР° В«РљРёРЅРѕРїРѕРёСЃРєВ»,
+СЃРѕРґРµСЂР¶Р°С‰СѓСЋ РІ СЃРµР±Рµ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ С„РёР»СЊРјР°С…, РїРѕР»СЊР·РѕРІР°С‚РµР»СЏС… РїР»Р°С‚С„РѕСЂРјС‹ Рё СЂР°Р·Р»РёС‡РЅС‹Рµ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ.
 */
 
 
@@ -11,7 +11,7 @@ CREATE DATABASE kinopoisk_s;
 
 USE kinopoisk_s;
 
--- Таблица пользователей сайта
+-- РўР°Р±Р»РёС†Р° РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ СЃР°Р№С‚Р°
 
 DROP TABLE IF EXISTS users;
 
@@ -23,7 +23,7 @@ CREATE TABLE users (
 	email varchar(50) null
 );
 
--- Таблица профиля пользователей сайта
+-- РўР°Р±Р»РёС†Р° РїСЂРѕС„РёР»СЏ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ СЃР°Р№С‚Р°
 
 DROP TABLE IF EXISTS user_profiles;
 
@@ -37,7 +37,7 @@ CREATE TABLE user_profiles (
 	about varchar(250) NULL
 );
 
--- Таблица фильмов
+-- РўР°Р±Р»РёС†Р° С„РёР»СЊРјРѕРІ
 
 DROP TABLE IF EXISTS kino_units;
 
@@ -46,7 +46,7 @@ CREATE TABLE kino_units (
 	name varchar(50) NULL
 );
 
--- Таблица "О фильме"
+-- РўР°Р±Р»РёС†Р° "Рћ С„РёР»СЊРјРµ"
 
 DROP TABLE IF EXISTS about_films;
 
@@ -73,7 +73,7 @@ CREATE TABLE about_films (
 	lenght time
 );
 
--- Таблица оценок фильмов
+-- РўР°Р±Р»РёС†Р° РѕС†РµРЅРѕРє С„РёР»СЊРјРѕРІ
 
 DROP TABLE IF EXISTS unit_rates;
 
@@ -85,7 +85,7 @@ CREATE TABLE unit_rates (
 	rating TINYINT null	
 );
 
--- Таблица актеров
+-- РўР°Р±Р»РёС†Р° Р°РєС‚РµСЂРѕРІ
 
 DROP TABLE IF EXISTS actors;
 
@@ -95,7 +95,7 @@ CREATE TABLE actors (
 	lastname varchar(50) NULL
 );
 
--- Таблица профиля актеров
+-- РўР°Р±Р»РёС†Р° РїСЂРѕС„РёР»СЏ Р°РєС‚РµСЂРѕРІ
 
 DROP TABLE IF EXISTS actor_profiles;
 
@@ -112,7 +112,7 @@ CREATE TABLE actor_profiles (
 	gender enum('m','f')
 );
 
--- Таблица "В главных ролях"
+-- РўР°Р±Р»РёС†Р° "Р’ РіР»Р°РІРЅС‹С… СЂРѕР»СЏС…"
 
 DROP TABLE IF EXISTS starring;
 
@@ -123,7 +123,7 @@ CREATE TABLE starring (
 	FOREIGN KEY (actor_id) REFERENCES actors(id)
 );
 
--- Таблица режиссеров
+-- РўР°Р±Р»РёС†Р° СЂРµР¶РёСЃСЃРµСЂРѕРІ
 
 DROP TABLE IF EXISTS directors;
 
@@ -133,7 +133,7 @@ CREATE TABLE directors (
 	lastname varchar(50) null
 );
 
--- Таблица профиля режиссеров
+-- РўР°Р±Р»РёС†Р° РїСЂРѕС„РёР»СЏ СЂРµР¶РёСЃСЃРµСЂРѕРІ
 
 DROP TABLE IF EXISTS director_profiles;
 
@@ -149,7 +149,7 @@ CREATE TABLE director_profiles (
 	gender enum('m','f')
 );
 
--- Таблица режиссеров фильмов
+-- РўР°Р±Р»РёС†Р° СЂРµР¶РёСЃСЃРµСЂРѕРІ С„РёР»СЊРјРѕРІ
 
 DROP TABLE IF EXISTS director_films;
 
@@ -160,66 +160,66 @@ CREATE TABLE director_films (
 	FOREIGN KEY (director_id) REFERENCES directors(id)
 );
 
--- Таблица жанров фильмов и сериалов
+-- РўР°Р±Р»РёС†Р° Р¶Р°РЅСЂРѕРІ С„РёР»СЊРјРѕРІ Рё СЃРµСЂРёР°Р»РѕРІ
 
 DROP TABLE IF EXISTS genres;
 
 CREATE TABLE genres (
 	film_id bigint UNSIGNED NOT NULL UNIQUE,
 	FOREIGN KEY (film_id) REFERENCES kino_units(id),
-	comedy BIT DEFAULT 0 NULL COMMENT 'Комедия',
-	cartoon BIT DEFAULT 0 NULL COMMENT 'Мультфильм',
-	horror BIT DEFAULT 0 NULL COMMENT 'Ужасы',
-	fantastic BIT DEFAULT 0 NULL COMMENT 'Фантастика',
-	triller BIT DEFAULT 0 NULL COMMENT 'Триллер',
-	action_movie BIT DEFAULT 0 NULL COMMENT 'Боевик',
-	melodrama BIT DEFAULT 0 NULL COMMENT 'Мелодрама',
-	detective BIT DEFAULT 0 NULL COMMENT 'Детектив',
-	adventures BIT DEFAULT 0 NULL COMMENT 'Приключения',
-	fantasy BIT DEFAULT 0 NULL COMMENT 'Фэнтези',
-	war_film BIT DEFAULT 0 NULL COMMENT 'Военный',
-	anime BIT DEFAULT 0 NULL COMMENT 'Аниме',
-	history BIT DEFAULT 0 NULL COMMENT 'Исторический',
-	family BIT DEFAULT 0 NULL COMMENT 'Семейный',
-	drama BIT DEFAULT 0 NULL COMMENT 'Драма',
-	documental BIT DEFAULT 0 NULL COMMENT 'Документальный',
-	children BIT DEFAULT 0 NULL COMMENT 'Детский',
-	criminal BIT DEFAULT 0 NULL COMMENT 'Криминал',
-	biography BIT DEFAULT 0 NULL COMMENT 'Биография',
-	western BIT DEFAULT 0 NULL COMMENT 'Вестерн',
-	noir BIT DEFAULT 0 NULL COMMENT 'Нуар',
-	sport BIT DEFAULT 0 NULL COMMENT 'Спортивный',
-	short BIT DEFAULT 0 NULL COMMENT 'Короткометражный',
-	music BIT DEFAULT 0 NULL COMMENT 'Музыкальный'
+	comedy BIT DEFAULT 0 NULL COMMENT 'РљРѕРјРµРґРёСЏ',
+	cartoon BIT DEFAULT 0 NULL COMMENT 'РњСѓР»СЊС‚С„РёР»СЊРј',
+	horror BIT DEFAULT 0 NULL COMMENT 'РЈР¶Р°СЃС‹',
+	fantastic BIT DEFAULT 0 NULL COMMENT 'Р¤Р°РЅС‚Р°СЃС‚РёРєР°',
+	triller BIT DEFAULT 0 NULL COMMENT 'РўСЂРёР»Р»РµСЂ',
+	action_movie BIT DEFAULT 0 NULL COMMENT 'Р‘РѕРµРІРёРє',
+	melodrama BIT DEFAULT 0 NULL COMMENT 'РњРµР»РѕРґСЂР°РјР°',
+	detective BIT DEFAULT 0 NULL COMMENT 'Р”РµС‚РµРєС‚РёРІ',
+	adventures BIT DEFAULT 0 NULL COMMENT 'РџСЂРёРєР»СЋС‡РµРЅРёСЏ',
+	fantasy BIT DEFAULT 0 NULL COMMENT 'Р¤СЌРЅС‚РµР·Рё',
+	war_film BIT DEFAULT 0 NULL COMMENT 'Р’РѕРµРЅРЅС‹Р№',
+	anime BIT DEFAULT 0 NULL COMMENT 'РђРЅРёРјРµ',
+	history BIT DEFAULT 0 NULL COMMENT 'РСЃС‚РѕСЂРёС‡РµСЃРєРёР№',
+	family BIT DEFAULT 0 NULL COMMENT 'РЎРµРјРµР№РЅС‹Р№',
+	drama BIT DEFAULT 0 NULL COMMENT 'Р”СЂР°РјР°',
+	documental BIT DEFAULT 0 NULL COMMENT 'Р”РѕРєСѓРјРµРЅС‚Р°Р»СЊРЅС‹Р№',
+	children BIT DEFAULT 0 NULL COMMENT 'Р”РµС‚СЃРєРёР№',
+	criminal BIT DEFAULT 0 NULL COMMENT 'РљСЂРёРјРёРЅР°Р»',
+	biography BIT DEFAULT 0 NULL COMMENT 'Р‘РёРѕРіСЂР°С„РёСЏ',
+	western BIT DEFAULT 0 NULL COMMENT 'Р’РµСЃС‚РµСЂРЅ',
+	noir BIT DEFAULT 0 NULL COMMENT 'РќСѓР°СЂ',
+	sport BIT DEFAULT 0 NULL COMMENT 'РЎРїРѕСЂС‚РёРІРЅС‹Р№',
+	short BIT DEFAULT 0 NULL COMMENT 'РљРѕСЂРѕС‚РєРѕРјРµС‚СЂР°Р¶РЅС‹Р№',
+	music BIT DEFAULT 0 NULL COMMENT 'РњСѓР·С‹РєР°Р»СЊРЅС‹Р№'
 );
 
--- Таблица наград фильмов
+-- РўР°Р±Р»РёС†Р° РЅР°РіСЂР°Рґ С„РёР»СЊРјРѕРІ
 
 DROP TABLE IF EXISTS awards;
 
 CREATE TABLE awards (
 	film_id bigint UNSIGNED NOT NULL UNIQUE,
 	FOREIGN KEY (film_id) REFERENCES kino_units(id),
-	oscar BIT DEFAULT 0 NOT NULL COMMENT 'Оскар',
-	gg BIT DEFAULT 0 NOT NULL COMMENT 'Золотой глобус',
-	ba BIT DEFAULT 0 NOT NULL COMMENT 'Британская академия',
-	ce BIT DEFAULT 0 NOT NULL COMMENT 'Сезар',
-	sag BIT DEFAULT 0 NOT NULL COMMENT 'Премия Гильдии актеров',
-	nika BIT DEFAULT 0 NOT NULL COMMENT 'Ника',
-	zo BIT DEFAULT 0 NOT NULL COMMENT 'Золотой орел',
-	sat BIT DEFAULT 0 NOT NULL COMMENT 'Сатурн',
-	goja BIT DEFAULT 0 NOT NULL COMMENT 'Гойа',
-	emmy BIT DEFAULT 0 NOT NULL COMMENT 'Эмми',
-	afa BIT DEFAULT 0 NOT NULL COMMENT 'Азиатская киноакадемия',
-	efa BIT DEFAULT 0 NOT NULL COMMENT 'Европейская киноакадемия',
+	oscar BIT DEFAULT 0 NOT NULL COMMENT 'РћСЃРєР°СЂ',
+	gg BIT DEFAULT 0 NOT NULL COMMENT 'Р—РѕР»РѕС‚РѕР№ РіР»РѕР±СѓСЃ',
+	ba BIT DEFAULT 0 NOT NULL COMMENT 'Р‘СЂРёС‚Р°РЅСЃРєР°СЏ Р°РєР°РґРµРјРёСЏ',
+	ce BIT DEFAULT 0 NOT NULL COMMENT 'РЎРµР·Р°СЂ',
+	sag BIT DEFAULT 0 NOT NULL COMMENT 'РџСЂРµРјРёСЏ Р“РёР»СЊРґРёРё Р°РєС‚РµСЂРѕРІ',
+	nika BIT DEFAULT 0 NOT NULL COMMENT 'РќРёРєР°',
+	zo BIT DEFAULT 0 NOT NULL COMMENT 'Р—РѕР»РѕС‚РѕР№ РѕСЂРµР»',
+	sat BIT DEFAULT 0 NOT NULL COMMENT 'РЎР°С‚СѓСЂРЅ',
+	goja BIT DEFAULT 0 NOT NULL COMMENT 'Р“РѕР№Р°',
+	emmy BIT DEFAULT 0 NOT NULL COMMENT 'Р­РјРјРё',
+	afa BIT DEFAULT 0 NOT NULL COMMENT 'РђР·РёР°С‚СЃРєР°СЏ РєРёРЅРѕР°РєР°РґРµРјРёСЏ',
+	efa BIT DEFAULT 0 NOT NULL COMMENT 'Р•РІСЂРѕРїРµР№СЃРєР°СЏ РєРёРЅРѕР°РєР°РґРµРјРёСЏ',
 	mtv BIT DEFAULT 0 NOT NULL COMMENT 'MTV',
-	mtv_r BIT DEFAULT 0 NOT NULL COMMENT 'MTV Россия',
-	g_ma BIT DEFAULT 0 NOT NULL COMMENT 'Золотая малина',
-	zhorzh BIT DEFAULT 0 NOT NULL COMMENT 'Жорж'
+	mtv_r BIT DEFAULT 0 NOT NULL COMMENT 'MTV Р РѕСЃСЃРёСЏ',
+	g_ma BIT DEFAULT 0 NOT NULL COMMENT 'Р—РѕР»РѕС‚Р°СЏ РјР°Р»РёРЅР°',
+	zhorzh BIT DEFAULT 0 NOT NULL COMMENT 'Р–РѕСЂР¶'
 );
 
 
--- Заполнение таблиц
+-- Р—Р°РїРѕР»РЅРµРЅРёРµ С‚Р°Р±Р»РёС†
 
 INSERT INTO users VALUES
 	(1, 'Kendra', 'Lewis', 'Lewis23', 'Kendra_Lewis1604@elnee.tech'),
@@ -246,38 +246,38 @@ INSERT INTO user_profiles VALUES
 	(10, 10, DEFAULT, '1995-8-22', 'm', 'Mauris et dolor dolor. Ut mattis bibendum nisl, sit amet sodales ligula.');
 
 INSERT INTO kino_units VALUES
-	(1,'Зеленая миля'),
-	(2,'Побег из Шоушенка'),
-	(3,'Список Шиндлера'),
-	(4,'Властелин колец: Возвращение короля'),
-	(5,'Форрест Гамп'),
-	(6,'Властелин колец: Две крепости'),
-	(7,'Властелин колец: Братство Кольца'),
+	(1,'Р—РµР»РµРЅР°СЏ РјРёР»СЏ'),
+	(2,'РџРѕР±РµРі РёР· РЁРѕСѓС€РµРЅРєР°'),
+	(3,'РЎРїРёСЃРѕРє РЁРёРЅРґР»РµСЂР°'),
+	(4,'Р’Р»Р°СЃС‚РµР»РёРЅ РєРѕР»РµС†: Р’РѕР·РІСЂР°С‰РµРЅРёРµ РєРѕСЂРѕР»СЏ'),
+	(5,'Р¤РѕСЂСЂРµСЃС‚ Р“Р°РјРї'),
+	(6,'Р’Р»Р°СЃС‚РµР»РёРЅ РєРѕР»РµС†: Р”РІРµ РєСЂРµРїРѕСЃС‚Рё'),
+	(7,'Р’Р»Р°СЃС‚РµР»РёРЅ РєРѕР»РµС†: Р‘СЂР°С‚СЃС‚РІРѕ РљРѕР»СЊС†Р°'),
 	(8,'1 + 1'),
-	(9,'Криминальное Чтиво'),
-	(10,'Иван Васильевич меняет профессию');
+	(9,'РљСЂРёРјРёРЅР°Р»СЊРЅРѕРµ Р§С‚РёРІРѕ'),
+	(10,'РРІР°РЅ Р’Р°СЃРёР»СЊРµРІРёС‡ РјРµРЅСЏРµС‚ РїСЂРѕС„РµСЃСЃРёСЋ');
 
 INSERT INTO about_films VALUES
-	(1, 1, 'The Green Mile', '1999','США', '«Пол Эджкомб не верил в чудеса. Пока не столкнулся с одним из них»', 'Фрэнк Дарабонт, Стивен Кинг',
-	'Фрэнк Дарабонт, Дэвид Валдес', 'Дэвид Тэттерсолл', 'Томас Ньюман', 'Теренс Марш, Уильям Крус', 'Ричард Фрэнсис-Брюс', 60000000, 136801374,
+	(1, 1, 'The Green Mile', '1999','РЎРЁРђ', 'В«РџРѕР» Р­РґР¶РєРѕРјР± РЅРµ РІРµСЂРёР» РІ С‡СѓРґРµСЃР°. РџРѕРєР° РЅРµ СЃС‚РѕР»РєРЅСѓР»СЃСЏ СЃ РѕРґРЅРёРј РёР· РЅРёС…В»', 'Р¤СЂСЌРЅРє Р”Р°СЂР°Р±РѕРЅС‚, РЎС‚РёРІРµРЅ РљРёРЅРі',
+	'Р¤СЂСЌРЅРє Р”Р°СЂР°Р±РѕРЅС‚, Р”СЌРІРёРґ Р’Р°Р»РґРµСЃ', 'Р”СЌРІРёРґ РўСЌС‚С‚РµСЂСЃРѕР»Р»', 'РўРѕРјР°СЃ РќСЊСЋРјР°РЅ', 'РўРµСЂРµРЅСЃ РњР°СЂС€, РЈРёР»СЊСЏРј РљСЂСѓСЃ', 'Р РёС‡Р°СЂРґ Р¤СЂСЌРЅСЃРёСЃ-Р‘СЂСЋСЃ', 60000000, 136801374,
 	150000000, '2000-04-16', '1999-12-06', 16, '03:09:00'),
-	(2, 2, 'The Shawshank Redemption', '1994', 'США', '«Страх - это кандалы. Надежда - это свобода»', 'Chadwick Lee', 'Chadwick Lee', 'Chadwick Lee',
+	(2, 2, 'The Shawshank Redemption', '1994', 'РЎРЁРђ', 'В«РЎС‚СЂР°С… - СЌС‚Рѕ РєР°РЅРґР°Р»С‹. РќР°РґРµР¶РґР° - СЌС‚Рѕ СЃРІРѕР±РѕРґР°В»', 'Chadwick Lee', 'Chadwick Lee', 'Chadwick Lee',
 	'Chadwick Lee',	'Chadwick Lee', 'Chadwick Lee',	25000000, 28341469,	77218, '2019-09-10', '1994-04-05', 16, '02:22:00'),
-	(3, 3, 'Schindlers List', 1993,	'США', '«Этот список - жизнь»',	'Boris Willson', 'Boris Willson', 'Boris Willson', 'Boris Willson', 'Boris Willson', 'Boris Willson',
+	(3, 3, 'Schindlers List', 1993,	'РЎРЁРђ', 'В«Р­С‚РѕС‚ СЃРїРёСЃРѕРє - Р¶РёР·РЅСЊВ»',	'Boris Willson', 'Boris Willson', 'Boris Willson', 'Boris Willson', 'Boris Willson', 'Boris Willson',
 	35000000, 154000000, 4500000, '1994-03-02', '1999-05-01', 16, '01:56:00'),
-	(4, 4, 'The Lord of the Rings: The Return of the King', 2003, 'Новая Зеландия',	'«There can be no triumph without loss. No victory without suffering. No freedom without sacrifice»',
+	(4, 4, 'The Lord of the Rings: The Return of the King', 2003, 'РќРѕРІР°СЏ Р—РµР»Р°РЅРґРёСЏ',	'В«There can be no triumph without loss. No victory without suffering. No freedom without sacrificeВ»',
 	'Boris Huggins', 'Boris Huggins', 'Gind Errinf', 'Boris Huggins', 'Boris Huggins', 'Boris Huggins',	200000000, 54000000, 400000, '2003-11-02', '2003-12-01', 16, '02:34:00'),
-	(5, 5, 'Forrest Gump', '1994', 'США', '«Мир уже никогда не будет прежним, после того как вы увидите его глазами Форреста Гампа»',
+	(5, 5, 'Forrest Gump', '1994', 'РЎРЁРђ', 'В«РњРёСЂ СѓР¶Рµ РЅРёРєРѕРіРґР° РЅРµ Р±СѓРґРµС‚ РїСЂРµР¶РЅРёРј, РїРѕСЃР»Рµ С‚РѕРіРѕ РєР°Рє РІС‹ СѓРІРёРґРёС‚Рµ РµРіРѕ РіР»Р°Р·Р°РјРё Р¤РѕСЂСЂРµСЃС‚Р° Р“Р°РјРїР°В»',
 	'Shay Grady', 'Shay Grady', 'Shay Grady', 'Shay Grady', 'Shay Grady', 'Shay Grady', 1000000, 23000000, 32000000, '1995-04-11', '1994-09-10', 16, '01:30:20'),
-	(6, 6, 'The Lord of the Rings: The Two Towers',	'2002', 'Новая Зеландия',	'«Приключение продолжается»', 'Melania Funnell', 'Melania Funnell', 'Melania Funnell', 'Melania Funnell', 'Melania Funnell', 'Melania Funnell',
+	(6, 6, 'The Lord of the Rings: The Two Towers',	'2002', 'РќРѕРІР°СЏ Р—РµР»Р°РЅРґРёСЏ',	'В«РџСЂРёРєР»СЋС‡РµРЅРёРµ РїСЂРѕРґРѕР»Р¶Р°РµС‚СЃСЏВ»', 'Melania Funnell', 'Melania Funnell', 'Melania Funnell', 'Melania Funnell', 'Melania Funnell', 'Melania Funnell',
 	45000000, 100000000, 1200000, '2002-11-01', '2002-12-03', 16, '2:30:45'),
-	(7, 7, 'The Lord of the Rings: The Fellowship of the Ring', '2001', 'Новая Зеландия',	'«Power can be held in the smallest of things...»',	'Ramon Reyes', 'Ramon Reyes', 'Ramon Reyes', 'Ramon Reyes', 'Ramon Reyes', 'Ramon Reyes',
+	(7, 7, 'The Lord of the Rings: The Fellowship of the Ring', '2001', 'РќРѕРІР°СЏ Р—РµР»Р°РЅРґРёСЏ',	'В«Power can be held in the smallest of things...В»',	'Ramon Reyes', 'Ramon Reyes', 'Ramon Reyes', 'Ramon Reyes', 'Ramon Reyes', 'Ramon Reyes',
 	98000345, 235000000, 6500000, '2001-11-17', '2001-12-03', 16, '2:32:45'),
-	(8, 8, 'Intouchables', '2011', 'Франция', '«Sometimes you have to reach into someone elses world to find out whats missing in your own»', 'Vicky Stone', 'Vicky Stone', 'Vicky Stone', 'Vicky Stone', 'Vicky Stone', 'Vicky Stone',
+	(8, 8, 'Intouchables', '2011', 'Р¤СЂР°РЅС†РёСЏ', 'В«Sometimes you have to reach into someone elses world to find out whats missing in your ownВ»', 'Vicky Stone', 'Vicky Stone', 'Vicky Stone', 'Vicky Stone', 'Vicky Stone', 'Vicky Stone',
 	6000000, 27000000, 1200000, '2011-11-09', '2011-12-04', 16, '1:32:40'),
-	(9, 9, 'Pulp Fiction', '1994', 'США', '«Just because you are a character doesnt mean you have character»', 'Mackenzie Greenwood',	'Mackenzie Greenwood',	'Mackenzie Greenwood',	'Mackenzie Greenwood',	'Mackenzie Greenwood',	'Mackenzie Greenwood',
+	(9, 9, 'Pulp Fiction', '1994', 'РЎРЁРђ', 'В«Just because you are a character doesnt mean you have characterВ»', 'Mackenzie Greenwood',	'Mackenzie Greenwood',	'Mackenzie Greenwood',	'Mackenzie Greenwood',	'Mackenzie Greenwood',	'Mackenzie Greenwood',
 	8000000, 107928000, 200000,	'2011-11-09', '2011-12-04', 16, '1:32:40'),
-	(10, 10, 'Иван Васильевич меняет профессию', '1973', 'СССР', '-', 'Владлен Бахнов', 'Виталий Абрамов', 'Александр Зацепин', 'Раиса Петрова', 'Клавдия Алеева', 'Евгений Куманьков',
+	(10, 10, 'РРІР°РЅ Р’Р°СЃРёР»СЊРµРІРёС‡ РјРµРЅСЏРµС‚ РїСЂРѕС„РµСЃСЃРёСЋ', '1973', 'РЎРЎРЎР ', '-', 'Р’Р»Р°РґР»РµРЅ Р‘Р°С…РЅРѕРІ', 'Р’РёС‚Р°Р»РёР№ РђР±СЂР°РјРѕРІ', 'РђР»РµРєСЃР°РЅРґСЂ Р—Р°С†РµРїРёРЅ', 'Р Р°РёСЃР° РџРµС‚СЂРѕРІР°', 'РљР»Р°РІРґРёСЏ РђР»РµРµРІР°', 'Р•РІРіРµРЅРёР№ РљСѓРјР°РЅСЊРєРѕРІ',
 	NULL, NULL, NULL, '1973-03-17', NULL, 16, '01:28:00');
 
 INSERT INTO unit_rates VALUES
@@ -293,28 +293,28 @@ INSERT INTO unit_rates VALUES
 	(10, 7, 7);
 	
 INSERT INTO actors VALUES
-	(1, 'Том', 'Хэнкс'),
-	(2, 'Тим', 'Роббинс'),
-	(3, 'Морган', 'Фриман'),
-	(4, 'Лиам', 'Нисон'),
-	(5, 'Элайджа', 'Вуд'),
-	(6, 'Иэн', 'Маккелен'),
-	(7, 'Франсуа', 'Клюзе'),
-	(8, 'Джон', 'Траволта'),
-	(9, 'Самюэл', 'Л. Джексон'),
-	(10, 'Александр', 'Демьяненко');
+	(1, 'РўРѕРј', 'РҐСЌРЅРєСЃ'),
+	(2, 'РўРёРј', 'Р РѕР±Р±РёРЅСЃ'),
+	(3, 'РњРѕСЂРіР°РЅ', 'Р¤СЂРёРјР°РЅ'),
+	(4, 'Р›РёР°Рј', 'РќРёСЃРѕРЅ'),
+	(5, 'Р­Р»Р°Р№РґР¶Р°', 'Р’СѓРґ'),
+	(6, 'РСЌРЅ', 'РњР°РєРєРµР»РµРЅ'),
+	(7, 'Р¤СЂР°РЅСЃСѓР°', 'РљР»СЋР·Рµ'),
+	(8, 'Р”Р¶РѕРЅ', 'РўСЂР°РІРѕР»С‚Р°'),
+	(9, 'РЎР°РјСЋСЌР»', 'Р›. Р”Р¶РµРєСЃРѕРЅ'),
+	(10, 'РђР»РµРєСЃР°РЅРґСЂ', 'Р”РµРјСЊСЏРЅРµРЅРєРѕ');
 	
 INSERT INTO actor_profiles VALUES
-	(1, 11, 'Актер, Продюсер, Режиссер, Сценарист', 1.83, '1956-07-09', 'Конкорд, США', 'Комедия, драма, документальный', 399, 'm'),
-	(2, 12, 'Актер, Продюсер, Режиссер, Сценарист', 1.96, '1958-10-16', 'Уэст-Ковина, США', 'Драма, комедия, мелодрама', 213, 'm'),
-	(3, 13, 'Актер, Продюсер, Режиссер', 1.88, '1937-06-01', 'Мемфис, США', 'Драма, триллер, криминал', 358, 'm'),
-	(4, 14, 'Актер, Продюсер', 1.92, '1952-07-07', 'Беллимен, Северная Ирландия', 'Драма, триллер, боевик', 303, 'm'),
-	(5, 15, 'Актер, Продюсер, Режиссер', 1.65, '1981-01-28', 'Сидар-Рапидс, США', 'Комедия, драма, приключения', 271, 'm'),
-	(6, 16, 'Актер, Продюсер, Сценарист', 1.83, '1939-05-25', 'Бернли, Англия', 'Комедия, драма, короткометражка', 295, 'm'),
-	(7, 17, 'Актер, Режиссер', 1.74, '1955-09-21', 'Париж, Франция', 'Комедия, драма, мелодрама', 131, 'm'),
-	(8, 18, 'Актер, Продюсер, Сценарист', 1.88, '1954-02-18', 'Нью-Джерси, США', 'Триллер, драма, криминал', 295, 'm'),
-	(9, 19, 'Актер, Продюсер', 1.88, '1948-12-21', 'Вашингтон, США', 'Драма, боевик, триллер', 427, 'm'),
-	(10, 20, 'Актер, актер дубляжа', 1.69, '1937-05-30', 'Свердловск, СССР', 'Комедия, драма, мелодрама', 310, 'm');
+	(1, 11, 'РђРєС‚РµСЂ, РџСЂРѕРґСЋСЃРµСЂ, Р РµР¶РёСЃСЃРµСЂ, РЎС†РµРЅР°СЂРёСЃС‚', 1.83, '1956-07-09', 'РљРѕРЅРєРѕСЂРґ, РЎРЁРђ', 'РљРѕРјРµРґРёСЏ, РґСЂР°РјР°, РґРѕРєСѓРјРµРЅС‚Р°Р»СЊРЅС‹Р№', 399, 'm'),
+	(2, 12, 'РђРєС‚РµСЂ, РџСЂРѕРґСЋСЃРµСЂ, Р РµР¶РёСЃСЃРµСЂ, РЎС†РµРЅР°СЂРёСЃС‚', 1.96, '1958-10-16', 'РЈСЌСЃС‚-РљРѕРІРёРЅР°, РЎРЁРђ', 'Р”СЂР°РјР°, РєРѕРјРµРґРёСЏ, РјРµР»РѕРґСЂР°РјР°', 213, 'm'),
+	(3, 13, 'РђРєС‚РµСЂ, РџСЂРѕРґСЋСЃРµСЂ, Р РµР¶РёСЃСЃРµСЂ', 1.88, '1937-06-01', 'РњРµРјС„РёСЃ, РЎРЁРђ', 'Р”СЂР°РјР°, С‚СЂРёР»Р»РµСЂ, РєСЂРёРјРёРЅР°Р»', 358, 'm'),
+	(4, 14, 'РђРєС‚РµСЂ, РџСЂРѕРґСЋСЃРµСЂ', 1.92, '1952-07-07', 'Р‘РµР»Р»РёРјРµРЅ, РЎРµРІРµСЂРЅР°СЏ РСЂР»Р°РЅРґРёСЏ', 'Р”СЂР°РјР°, С‚СЂРёР»Р»РµСЂ, Р±РѕРµРІРёРє', 303, 'm'),
+	(5, 15, 'РђРєС‚РµСЂ, РџСЂРѕРґСЋСЃРµСЂ, Р РµР¶РёСЃСЃРµСЂ', 1.65, '1981-01-28', 'РЎРёРґР°СЂ-Р Р°РїРёРґСЃ, РЎРЁРђ', 'РљРѕРјРµРґРёСЏ, РґСЂР°РјР°, РїСЂРёРєР»СЋС‡РµРЅРёСЏ', 271, 'm'),
+	(6, 16, 'РђРєС‚РµСЂ, РџСЂРѕРґСЋСЃРµСЂ, РЎС†РµРЅР°СЂРёСЃС‚', 1.83, '1939-05-25', 'Р‘РµСЂРЅР»Рё, РђРЅРіР»РёСЏ', 'РљРѕРјРµРґРёСЏ, РґСЂР°РјР°, РєРѕСЂРѕС‚РєРѕРјРµС‚СЂР°Р¶РєР°', 295, 'm'),
+	(7, 17, 'РђРєС‚РµСЂ, Р РµР¶РёСЃСЃРµСЂ', 1.74, '1955-09-21', 'РџР°СЂРёР¶, Р¤СЂР°РЅС†РёСЏ', 'РљРѕРјРµРґРёСЏ, РґСЂР°РјР°, РјРµР»РѕРґСЂР°РјР°', 131, 'm'),
+	(8, 18, 'РђРєС‚РµСЂ, РџСЂРѕРґСЋСЃРµСЂ, РЎС†РµРЅР°СЂРёСЃС‚', 1.88, '1954-02-18', 'РќСЊСЋ-Р”Р¶РµСЂСЃРё, РЎРЁРђ', 'РўСЂРёР»Р»РµСЂ, РґСЂР°РјР°, РєСЂРёРјРёРЅР°Р»', 295, 'm'),
+	(9, 19, 'РђРєС‚РµСЂ, РџСЂРѕРґСЋСЃРµСЂ', 1.88, '1948-12-21', 'Р’Р°С€РёРЅРіС‚РѕРЅ, РЎРЁРђ', 'Р”СЂР°РјР°, Р±РѕРµРІРёРє, С‚СЂРёР»Р»РµСЂ', 427, 'm'),
+	(10, 20, 'РђРєС‚РµСЂ, Р°РєС‚РµСЂ РґСѓР±Р»СЏР¶Р°', 1.69, '1937-05-30', 'РЎРІРµСЂРґР»РѕРІСЃРє, РЎРЎРЎР ', 'РљРѕРјРµРґРёСЏ, РґСЂР°РјР°, РјРµР»РѕРґСЂР°РјР°', 310, 'm');
 
 INSERT INTO starring VALUES
 	(1, 1),
@@ -334,22 +334,22 @@ INSERT INTO starring VALUES
 	(10, 10);
 
 INSERT INTO directors VALUES
-	(1, 'Фрэнк', 'Дарабонт'),
-	(2, 'Стивен', 'Спилберг'),
-	(3, 'Питер', 'Джексон'),
-	(4, 'Роберт', 'Земекис'),
-	(5, 'Оливье', 'Накаш'),
-	(6, 'Квентин', 'Тарантино'),
-	(7, 'Леонид', 'Гайдай');
+	(1, 'Р¤СЂСЌРЅРє', 'Р”Р°СЂР°Р±РѕРЅС‚'),
+	(2, 'РЎС‚РёРІРµРЅ', 'РЎРїРёР»Р±РµСЂРі'),
+	(3, 'РџРёС‚РµСЂ', 'Р”Р¶РµРєСЃРѕРЅ'),
+	(4, 'Р РѕР±РµСЂС‚', 'Р—РµРјРµРєРёСЃ'),
+	(5, 'РћР»РёРІСЊРµ', 'РќР°РєР°С€'),
+	(6, 'РљРІРµРЅС‚РёРЅ', 'РўР°СЂР°РЅС‚РёРЅРѕ'),
+	(7, 'Р›РµРѕРЅРёРґ', 'Р“Р°Р№РґР°Р№');
 
 INSERT INTO director_profiles VALUES
-	(1, 21, 'Сценарист, Актер, Режиссер, Продюсер', 1.83, 'Драма, триллер, ужасы', 'Керин Вагнер', 60, 'm'),
-	(2, 22, 'Продюсер, Режиссер, Актер, Сценарист, Монтажер, Оператор, Композитор', 1.72, 'Приключения, драма, комедия', 'Эми Ирвинг', 482, 'm'),
-	(3, 23, 'Продюсер, Режиссер, Актер, Сценарист, Оператор, Художник, Монтажер', 1.65, 'Короткометражка, документальный, фэнтези', 'Кэти Джексон', 164, 'm'),
-	(4, 24, 'Продюсер, Режиссер, Сценарист, Актер', 1.83, 'Комедия, драма, триллер', 'Лесли Земекис', 130, 'm'),
-	(5, 25, 'Сценарист, Режиссер, Продюсер, Актер', DEFAULT, 'Комедия, драма, короткометражка', DEFAULT, 33, 'm'),
-	(6, 26, 'Актер, Сценарист, Режиссер, Продюсер, Оператор, Монтажер', 1.85, 'Драма, комедия, криминал', 'Даниэлла Пик', 234, 'm'),
-	(7, 27, 'Режиссер, Сценарист, Актер', 1.83, 'Комедия, криминал, приключения', 'Нина Гребешкова', 32, 'm');
+	(1, 21, 'РЎС†РµРЅР°СЂРёСЃС‚, РђРєС‚РµСЂ, Р РµР¶РёСЃСЃРµСЂ, РџСЂРѕРґСЋСЃРµСЂ', 1.83, 'Р”СЂР°РјР°, С‚СЂРёР»Р»РµСЂ, СѓР¶Р°СЃС‹', 'РљРµСЂРёРЅ Р’Р°РіРЅРµСЂ', 60, 'm'),
+	(2, 22, 'РџСЂРѕРґСЋСЃРµСЂ, Р РµР¶РёСЃСЃРµСЂ, РђРєС‚РµСЂ, РЎС†РµРЅР°СЂРёСЃС‚, РњРѕРЅС‚Р°Р¶РµСЂ, РћРїРµСЂР°С‚РѕСЂ, РљРѕРјРїРѕР·РёС‚РѕСЂ', 1.72, 'РџСЂРёРєР»СЋС‡РµРЅРёСЏ, РґСЂР°РјР°, РєРѕРјРµРґРёСЏ', 'Р­РјРё РСЂРІРёРЅРі', 482, 'm'),
+	(3, 23, 'РџСЂРѕРґСЋСЃРµСЂ, Р РµР¶РёСЃСЃРµСЂ, РђРєС‚РµСЂ, РЎС†РµРЅР°СЂРёСЃС‚, РћРїРµСЂР°С‚РѕСЂ, РҐСѓРґРѕР¶РЅРёРє, РњРѕРЅС‚Р°Р¶РµСЂ', 1.65, 'РљРѕСЂРѕС‚РєРѕРјРµС‚СЂР°Р¶РєР°, РґРѕРєСѓРјРµРЅС‚Р°Р»СЊРЅС‹Р№, С„СЌРЅС‚РµР·Рё', 'РљСЌС‚Рё Р”Р¶РµРєСЃРѕРЅ', 164, 'm'),
+	(4, 24, 'РџСЂРѕРґСЋСЃРµСЂ, Р РµР¶РёСЃСЃРµСЂ, РЎС†РµРЅР°СЂРёСЃС‚, РђРєС‚РµСЂ', 1.83, 'РљРѕРјРµРґРёСЏ, РґСЂР°РјР°, С‚СЂРёР»Р»РµСЂ', 'Р›РµСЃР»Рё Р—РµРјРµРєРёСЃ', 130, 'm'),
+	(5, 25, 'РЎС†РµРЅР°СЂРёСЃС‚, Р РµР¶РёСЃСЃРµСЂ, РџСЂРѕРґСЋСЃРµСЂ, РђРєС‚РµСЂ', DEFAULT, 'РљРѕРјРµРґРёСЏ, РґСЂР°РјР°, РєРѕСЂРѕС‚РєРѕРјРµС‚СЂР°Р¶РєР°', DEFAULT, 33, 'm'),
+	(6, 26, 'РђРєС‚РµСЂ, РЎС†РµРЅР°СЂРёСЃС‚, Р РµР¶РёСЃСЃРµСЂ, РџСЂРѕРґСЋСЃРµСЂ, РћРїРµСЂР°С‚РѕСЂ, РњРѕРЅС‚Р°Р¶РµСЂ', 1.85, 'Р”СЂР°РјР°, РєРѕРјРµРґРёСЏ, РєСЂРёРјРёРЅР°Р»', 'Р”Р°РЅРёСЌР»Р»Р° РџРёРє', 234, 'm'),
+	(7, 27, 'Р РµР¶РёСЃСЃРµСЂ, РЎС†РµРЅР°СЂРёСЃС‚, РђРєС‚РµСЂ', 1.83, 'РљРѕРјРµРґРёСЏ, РєСЂРёРјРёРЅР°Р», РїСЂРёРєР»СЋС‡РµРЅРёСЏ', 'РќРёРЅР° Р“СЂРµР±РµС€РєРѕРІР°', 32, 'm');
 	
 INSERT INTO director_films VALUES
 	(1, 1),
@@ -388,9 +388,9 @@ INSERT INTO awards VALUES
 (10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 
--- Представления
+-- РџСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ
 
--- Топ 5 фильмов по бюджету
+-- РўРѕРї 5 С„РёР»СЊРјРѕРІ РїРѕ Р±СЋРґР¶РµС‚Сѓ
 
 DROP VIEW IF EXISTS top5_films_bidget;
 
@@ -404,7 +404,7 @@ CREATE VIEW top5_films_bidget AS
 
 SELECT * FROM top5_films_bidget;
 
--- Вся информация о фильме
+-- Р’СЃСЏ РёРЅС„РѕСЂРјР°С†РёСЏ Рѕ С„РёР»СЊРјРµ
 
 DROP VIEW IF EXISTS film_info;
 
@@ -416,7 +416,7 @@ CREATE VIEW film_info AS
 
 SELECT * FROM film_info;
 
--- Режиссеры и их фильмы
+-- Р РµР¶РёСЃСЃРµСЂС‹ Рё РёС… С„РёР»СЊРјС‹
 
 DROP VIEW IF EXISTS directors_and_films;
 
@@ -429,7 +429,7 @@ CREATE VIEW directors_and_films AS
 
 SELECT * FROM directors_and_films;
 
--- Фильмы с Оскаром или Золотым глобусом
+-- Р¤РёР»СЊРјС‹ СЃ РћСЃРєР°СЂРѕРј РёР»Рё Р—РѕР»РѕС‚С‹Рј РіР»РѕР±СѓСЃРѕРј
 
 DROP VIEW IF EXISTS films_with_awards;
 
@@ -442,10 +442,10 @@ CREATE VIEW films_with_awards AS
 SELECT * FROM films_with_awards;
 
 
--- Хранимые процедуры
+-- РҐСЂР°РЅРёРјС‹Рµ РїСЂРѕС†РµРґСѓСЂС‹
 
 
--- Актеры, сыгравшие в определенном фильме
+-- РђРєС‚РµСЂС‹, СЃС‹РіСЂР°РІС€РёРµ РІ РѕРїСЂРµРґРµР»РµРЅРЅРѕРј С„РёР»СЊРјРµ
 
 DROP PROCEDURE IF EXISTS film_actors;
 
@@ -462,7 +462,7 @@ END;
 CALL film_actors(2);
 
 
--- Количество оценок фильмов, которые поставили пользователи 30 лет и младше
+-- РљРѕР»РёС‡РµСЃС‚РІРѕ РѕС†РµРЅРѕРє С„РёР»СЊРјРѕРІ, РєРѕС‚РѕСЂС‹Рµ РїРѕСЃС‚Р°РІРёР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»Рё 30 Р»РµС‚ Рё РјР»Р°РґС€Рµ
 
 DROP PROCEDURE IF EXISTS users_30;
 
@@ -476,7 +476,7 @@ END;
 CALL users_30();
 
 
--- Фильмы, в которых сыграл определенный актер
+-- Р¤РёР»СЊРјС‹, РІ РєРѕС‚РѕСЂС‹С… СЃС‹РіСЂР°Р» РѕРїСЂРµРґРµР»РµРЅРЅС‹Р№ Р°РєС‚РµСЂ
 
 DROP PROCEDURE IF EXISTS actor_career;
 
@@ -492,7 +492,7 @@ END;
 
 CALL actor_career(5);
 
--- Список пользователей, которые ставили оценки хотя бы один раз
+-- РЎРїРёСЃРѕРє РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№, РєРѕС‚РѕСЂС‹Рµ СЃС‚Р°РІРёР»Рё РѕС†РµРЅРєРё С…РѕС‚СЏ Р±С‹ РѕРґРёРЅ СЂР°Р·
 
 DROP PROCEDURE IF EXISTS nickname_rates_once;
 
@@ -508,10 +508,10 @@ CALL nickname_rates_once();
 
 
 
--- Хранимые функции
+-- РҐСЂР°РЅРёРјС‹Рµ С„СѓРЅРєС†РёРё
 
 
--- Средняя оценка для фильма, исходя из оценок пользователей
+-- РЎСЂРµРґРЅСЏСЏ РѕС†РµРЅРєР° РґР»СЏ С„РёР»СЊРјР°, РёСЃС…РѕРґСЏ РёР· РѕС†РµРЅРѕРє РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№
 
 
 DROP FUNCTION IF EXISTS art;
@@ -526,16 +526,16 @@ END;
 SELECT art (3);
 
 
--- Триггеры
+-- РўСЂРёРіРіРµСЂС‹
 
--- Триггер на дату рождения пользователя
+-- РўСЂРёРіРіРµСЂ РЅР° РґР°С‚Сѓ СЂРѕР¶РґРµРЅРёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 
 DROP TRIGGER IF EXISTS date_b;
 
 CREATE TRIGGER date_b BEFORE UPDATE ON user_profiles FOR EACH ROW
 BEGIN
 	IF NEW.birthday >= CURRENT_DATE()
-	THEN SIGNAL SQLSTATE '45000' SET message_text = 'Ошибка. Неверная дата';
+	THEN SIGNAL SQLSTATE '45000' SET message_text = 'РћС€РёР±РєР°. РќРµРІРµСЂРЅР°СЏ РґР°С‚Р°';
 	END IF;
 END;
 
